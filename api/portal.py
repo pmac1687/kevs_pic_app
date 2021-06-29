@@ -5,6 +5,7 @@ from flask_cors import CORS
 import csv
 import psycopg2
 import keys
+import datetime
 
 #create flask web app object
 app = Flask(__name__)
@@ -18,11 +19,12 @@ def add_row(slug):
     date = slug.split('&')[3]
     fileType = slug.split('&')[4]
     location = slug.split('&')[5]
+    img_type = slug.split('&')[6]
     conn = psycopg2.connect(database="postgres", user=keys.user, password=keys.password, host=keys.host, port="5432")
     cur = conn.cursor()
     #cur.execute(f"select * from master_ticker_list limit 5;")
     try:
-        cur.execute(f"""insert into kevspics(name, type, date, tags, location, event ) values('{name}','{fileType}','{date}','{tags}','{location}','{occ}') """)
+        cur.execute(f"""insert into kevspics(name, type, date, tags, location, event, img_type ) values('{name}','{fileType}','{date}','{tags}','{location}','{occ}', '{img_type}') """)
     except Exception as e:
         print(e)
     conn.commit()
@@ -37,10 +39,31 @@ def get_rows():
     #cur.execute(f"select * from master_ticker_list limit 5;")
     try:
         cur.execute(f"""select * from kevspics; """)
+        data = cur.fetchall()
+        print(data)
     except Exception as e:
         print(e)
+
+    new_list = [y.strftime("%m-%d-%Y") if type(y) == datetime.date else y for x in data for y in x  ]  
+    arr = []
+    for lst in data:
+        arr2 = []
+        for item in lst:
+            if type(item) == datetime.date:
+                print(item)
+                item = item.strftime("%m-%d-%Y")
+                arr2.append(item)
+            else:
+                arr2.append(item)
+
+            if item == lst[-1]:
+                arr.append(arr2)
+
+    print(new_list)          #if x[1] not in to_be_removed]
     conn.commit()
     conn.close()
+
+    return json.dumps(arr)
 
 
 
