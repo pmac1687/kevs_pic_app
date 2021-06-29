@@ -37,14 +37,14 @@ const UploadImageToS3WithNativeSdk = () => {
 
 
 
-    const addToDb = () => {
+    const addToDb = (fType) => {
         const name = document.getElementById('grid-first-name').value ? document.getElementById('grid-first-name').value : '';
         const occasion = document.getElementById('occasion').value ? document.getElementById('occasion').value : '';
         const tags = document.getElementById('tags').value ? document.getElementById('tags').value : '';
         const date = startDate.toISOString().split('T')[0];
         const fileType = document.getElementById('file-type').value;
         const location = document.getElementById('location').value ? document.getElementById('location').value : '';
-        const slug = `${name}&${occasion}&${tags}&${date}&${fileType}&${location}`
+        const slug = `${name}&${occasion}&${tags}&${date}&${fileType}&${location}&${fType}`
         axios.get(`http://localhost:5000/add_row/${slug}`, {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -62,19 +62,20 @@ const UploadImageToS3WithNativeSdk = () => {
 
     const uploadFile = (file) => {
         const name = document.getElementById('grid-first-name').value;
+        const fileType = file.name.split('.')[1]
         console.log(file)
         const params = {
             ACL: 'public-read',
             Body: file,
             Bucket: S3_BUCKET,
-            Key: `${name}.JPG`
+            Key: `${name}.${fileType}`
         };
 
         myBucket.putObject(params)
             .on('httpUploadProgress', (evt) => {
                 setProgress(Math.round((evt.loaded / evt.total) * 100))
                 if (evt.loaded === evt.total) {
-                    addToDb()
+                    addToDb(fileType)
                 }
             })
             .send((err) => {
