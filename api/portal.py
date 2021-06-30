@@ -1,5 +1,5 @@
 # importing the flask library files
-from flask import Flask
+from flask import Flask, request
 import json
 from flask_cors import CORS
 import csv
@@ -10,6 +10,30 @@ import datetime
 #create flask web app object
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/login", methods=['POST'])
+def login():
+    username = json.loads(request.data)['data']['username']
+    password = json.loads(request.data)['data']['password']
+    print(username, password)
+    conn = psycopg2.connect(database="postgres", user=keys.user, password=keys.password, host=keys.host, port="5432")
+    cur = conn.cursor()
+    #cur.execute(f"select * from master_ticker_list limit 5;")
+    try:
+        cur.execute(f"""select * from kevspasswords where username='{username}' and password='{password}' """)
+        res = cur.fetchone()
+        print(res)
+        conn.commit()
+        conn.close()
+        return json.dumps(res)
+    
+    except Exception as e:
+        print(e)
+        conn.commit()
+        conn.close()
+        return e
+
+
 
 @app.route("/add_row/<slug>")
 def add_row(slug):
