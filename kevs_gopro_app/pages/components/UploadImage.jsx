@@ -22,7 +22,7 @@ const myBucket = new AWS.S3({
 })
 
 
-const UploadImageToS3WithNativeSdk = () => {
+const UploadImage = () => {
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -159,4 +159,4 @@ const UploadImageToS3WithNativeSdk = () => {
 )
 }
 
-export default UploadImageToS3WithNativeSdk;
+export default UploadImage;
