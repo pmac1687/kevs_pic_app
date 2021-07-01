@@ -29,8 +29,6 @@ def login():
     
     except Exception as e:
         print(e)
-        conn.commit()
-        conn.close()
         return None
 
 

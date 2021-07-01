@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import Uploader from "./components/Uploader";
-import UserContext from "./components/UserContext";
-import Login from "./components/Login";
+import Uploader from "../components/Uploader";
+import UserContext from "../components/UserContext";
+import Login from "../components/Login";
+import styles from '../styles/Home.module.css'
+
 
 const UploadImage = () => {
-    const { user, getToken } = useContext(UserContext)
+    const { getToken } = useContext(UserContext)
     return (
-        <>
-            { (!sessionStorage.getItem()) ? <Login /> : <Uploader />  }
-        </>
+        <div className={styles.container}>
+            { (!getToken()) ? <Login /> : <Uploader />  }
+        </div>
     )
 }
 

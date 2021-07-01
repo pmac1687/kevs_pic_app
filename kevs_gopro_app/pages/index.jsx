@@ -1,17 +1,11 @@
 import Head from 'next/head';
-import Router from 'next/router';
-import { useState } from 'react';
 import styles from '../styles/Home.module.css'
-import Login from './components/Login';
+import Login from '../components/Login';
 
 
 
 export default function Home() {
-  const [token, setToken] = useState();
 
-  if(token) {
-    Router.push('/uploadimage')
-  }
 
   return (
     <div className={styles.container}>

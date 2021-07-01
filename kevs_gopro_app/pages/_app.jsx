@@ -5,24 +5,20 @@
 // import '../styles/index.css';
 import { useState } from 'react';
 import "tailwindcss/tailwind.css";
-import UserContext from './components/UserContext'
+import UserContext from '../components/UserContext'
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState()
 
   const setToken = (token) => {
-    sessionStorage.setItem('token', token);
-    console.log('token', sessionStorage.getItem('token'))
+    if (token) {
+      setUser(token)
+    }
   }
 
-  const getToken = () => {
-    console.log(sessionStorage)
-    const tokenString = sessionStorage && sessionStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.token
-  }
+  const getToken = () => user;
   return (
-      <UserContext.Provider value={{ user, setUser, setToken, getToken }}>
+      <UserContext.Provider value={{ setToken, getToken }}>
         <Component {...pageProps} />
       </UserContext.Provider>
 

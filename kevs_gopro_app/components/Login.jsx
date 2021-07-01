@@ -1,28 +1,15 @@
-import { useEffect, useState,useContext } from 'react';
+import {  useContext } from 'react';
 import axios from 'axios';
-import useUser from './Hooks';
+import Router from 'next/router';
 import UserContext from './UserContext';
 
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const Login = () => {
 
-  const { user, setUser, setToken } = useContext(UserContext);
+  const { setToken } = useContext(UserContext);
 
-  const [data, setData] = useState()
-
-  useEffect(() => {
-    console.log(document.cookie.get)
-  },[data])
-
-  const loginClick = () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    if (!username || !password) {
-      // eslint-disable-next-line no-alert
-      alert(`missing ${username ? 'username' : 'password'}`)
-    } else checkPassword(username, password)
-  }
+  // const [data, setData] = useState()
 
   const checkPassword = (username, password) => {
     axios.post(`http://localhost:5000/login`, {
@@ -36,18 +23,29 @@ const Login = () => {
     })  
     .then(res => res.data)
     .then(dats => {
-      console.log('resdata rows', dats);
       if (dats) {
-        setUser(prev => dats);
-        setToken(dats)
-      }
-      // document.cookie.set(dats[1]);
+        setToken(dats);
+        Router.push('uploadimage')
+        
+      } else {document.getElementById('incorrect').style.display = 'block'}
 
     })
-    .catch(err => {  
-      console.log(err)  
+    .catch(() => {  
+      document.getElementById('incorrect').style.display = 'block'
     });
   }
+
+
+  const loginClick = () => {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    if (!username || !password) {
+      // eslint-disable-next-line no-alert
+      alert(`missing ${username ? 'username' : 'password'}`)
+    } else checkPassword(username, password)
+  }
+
+
 
   return (
     <form className="w-full max-w-sm">
@@ -74,9 +72,16 @@ const Login = () => {
       <div className="md:flex md:items-center">
         <div className="md:w-1/3" />
         <div className="md:w-2/3">
-          <button onClick={loginClick} className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+          <button onClick={(e) => { e.preventDefault(); loginClick() }} className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
             Sign In
           </button>
+        </div>
+      </div>
+      <div id='incorrect' style={{ display : 'none'}} className="md:flex md:items-center mb-6">
+        <div style={{  marginLeft: '4vw' }} className="md:w-3/9">
+          <label style={{ fontSize: '12px'}} className="block text-red-400 font-bold sm:text-right mb-1 sm:mb-0 pr-4" htmlFor="inline-password">
+            Password or Username Incorrect Please Try Again
+          </label>
         </div>
       </div>
     </form>
