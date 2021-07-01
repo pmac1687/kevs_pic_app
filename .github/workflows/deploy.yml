@@ -16,11 +16,9 @@ jobs:
           pwd
           cd kevs_gopro_app/
           ls
-      - run: ls
-      - run: cd kevs_gopro_app/
-      - run: ls
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: mv out/kevspics.html out/kevspics
-      - run: mv out/uploadimage.html out/uploadimage
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
+          mv out/kevspics.html out/kevspics
+          mv out/uploadimage.html out/uploadimage
+
