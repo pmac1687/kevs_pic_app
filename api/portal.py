@@ -25,13 +25,13 @@ def login():
         print(res)
         conn.commit()
         conn.close()
-        return json.dumps(res)
+        return json.dumps(res[1])
     
     except Exception as e:
         print(e)
         conn.commit()
         conn.close()
-        return e
+        return None
 
 
 
