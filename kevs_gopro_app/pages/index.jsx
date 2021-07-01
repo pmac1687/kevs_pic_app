@@ -1,11 +1,18 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Router from 'next/router';
+import { useState } from 'react';
 import styles from '../styles/Home.module.css'
-import UploadImage
-  from './components/UploadImage'
 import Login from './components/Login';
-import { Links } from './components/Links'
+
+
 
 export default function Home() {
+  const [token, setToken] = useState();
+
+  if(token) {
+    Router.push('/uploadimage')
+  }
+
   return (
     <div className={styles.container}>
       <Head>

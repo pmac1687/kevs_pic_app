@@ -22,7 +22,7 @@ const myBucket = new AWS.S3({
 })
 
 
-const UploadImage = () => {
+const Uploader = () => {
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -159,4 +159,4 @@ const UploadImage = () => {
 )
 }
 
-export default UploadImage;
+export default Uploader;

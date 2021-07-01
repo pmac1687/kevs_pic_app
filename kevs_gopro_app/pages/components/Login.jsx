@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useContext } from 'react';
 import axios from 'axios';
 import useUser from './Hooks';
+import UserContext from './UserContext';
 
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const Login = () => {
+
+  const { user, setUser, setToken } = useContext(UserContext);
 
   const [data, setData] = useState()
 
@@ -34,8 +37,11 @@ const Login = () => {
     .then(res => res.data)
     .then(dats => {
       console.log('resdata rows', dats);
-      setData(prev => dats);
-      document.cookie.set(dats[1]);
+      if (dats) {
+        setUser(prev => dats);
+        setToken(dats)
+      }
+      // document.cookie.set(dats[1]);
 
     })
     .catch(err => {  
