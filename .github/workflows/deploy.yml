@@ -12,7 +12,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: cd /kevs_gopro_app/
+      - run: |
+          pwd
+          cd kevs_gopro_app/
+          ls
       - run: ls
       - run: cd kevs_gopro_app/
       - run: ls
