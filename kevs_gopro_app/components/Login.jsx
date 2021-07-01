@@ -12,7 +12,7 @@ const Login = () => {
   // const [data, setData] = useState()
 
   const checkPassword = (username, password) => {
-    axios.post(`34.229.138.224/login`, {
+    axios.post(`http://34.229.138.224/login`, {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
