@@ -16,7 +16,7 @@ const KevsPics = () => {
   // const Redirect = (user) ? redirect('/kevspics') : redirect('/')
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/get_rows`, {
+    axios.get(`34.229.138.224/get_rows`, {
       headers: {
         "Access-Control-Allow-Origin": "*",
       }

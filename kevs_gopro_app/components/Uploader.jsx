@@ -45,7 +45,7 @@ const Uploader = () => {
         const fileType = document.getElementById('file-type').value;
         const location = document.getElementById('location').value ? document.getElementById('location').value : '';
         const slug = `${name}&${occasion}&${tags}&${date}&${fileType}&${location}&${fType}`
-        axios.get(`http://localhost:5000/add_row/${slug}`, {
+        axios.get(`34.229.138.224/add_row/${slug}`, {
           headers: {
             "Access-Control-Allow-Origin": "*",
           }
