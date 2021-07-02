@@ -19,8 +19,6 @@ jobs:
           npm install -g yarn
           yarn install --frozen-lockfile
           yarn build
-          mv out/kevspics.html out/kevspics
-          mv out/uploadimage.html out/uploadimage
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
