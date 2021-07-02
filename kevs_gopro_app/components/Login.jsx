@@ -25,7 +25,7 @@ const Login = () => {
     .then(dats => {
       if (dats) {
         setToken(dats);
-        Router.push('uploadimage')
+        Router.push('uploadimage.html')
         
       } else {document.getElementById('incorrect').style.display = 'block'}
 
