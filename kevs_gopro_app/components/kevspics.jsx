@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 // import UserContext from "../components/UserContext";
-import Login from "../components/Login";
 import styles from '../styles/Home.module.css'
 
 
@@ -52,7 +51,7 @@ const KevsPics = () => {
 
   return (
     <div className={styles.container}>
-      {(!localStorage && localStorage.getItem('token')) ? <Login /> : picArr.map((pic) => (pic))}
+      {picArr.map((pic) => (pic))}
     </div>
 
 

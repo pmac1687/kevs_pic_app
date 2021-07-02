@@ -1,13 +1,10 @@
-import {  useContext } from 'react';
 import axios from 'axios';
-import Router from 'next/router';
-import UserContext from './UserContext';
 
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const Login = () => {
 
-  const { setToken } = useContext(UserContext);
+  // const { setToken } = useContext(UserContext);
 
   // const [data, setData] = useState()
 
@@ -24,9 +21,12 @@ const Login = () => {
     .then(res => res.data)
     .then(dats => {
       if (dats) {
-        localStorage.setItem('token', dats);
-        setToken(dats);
-        Router.push('uploadimage.html');
+        // localStorage.setItem('token', dats);
+        // setToken(dats);
+        const login = document.getElementById('login')
+        login.style.display = 'none'
+        const upload = document.getElementById('upload')
+        upload.style.display = 'block'
         // console.log(localStorage.getItem('token'))
         
       } else {document.getElementById('incorrect').style.display = 'block'}

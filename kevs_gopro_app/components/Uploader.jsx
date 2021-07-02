@@ -31,11 +31,16 @@ const Uploader = () => {
 
     const col = progress < 100 ? 'red' : 'green';
 
-    const handleFileInput = (e) => {
-        setSelectedFile(e.target.files[0]);
+  const handleFileInput = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const showPics = () => {
+    const upload = document.getElementById('upload')
+    upload.style.display = 'none'
+    const pics = document.getElementById('pics');
+    pics.style.display = 'block'
     }
-
-
 
     const addToDb = (fType) => {
         const name = document.getElementById('grid-first-name').value ? document.getElementById('grid-first-name').value : '';
@@ -150,6 +155,9 @@ const Uploader = () => {
                 <div style={{ display: 'flex', marginBottom: '1vh'}}>File Upload Progress is: <div style={{ color: col , marginLeft: '.5vw'}}>{progress}%</div></div>
                 <input type="file" onChange={handleFileInput}/>
                 <button  onClick={() => uploadFile(selectedFile)} className="shadow bg-green-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                    Upload
+                </button>
+                <button style={{ marginLeft: '1vw'}}  onClick={() => showPics()} className="shadow bg-blue-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                     Upload
                 </button>
             </div>
