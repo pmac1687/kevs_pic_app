@@ -51,7 +51,9 @@ const KevsPics = () => {
   // const Pic = PicArr && PicArr.map((pic) => (pic))
 
   return (
-    <div className={styles.container}>{ (!getToken()) ? <Login /> : picArr.map((pic) => (pic))}</div>
+    <div className={styles.container}>
+      {(!localStorage && localStorage.getItem('token')) ? <Login /> : picArr.map((pic) => (pic))}
+    </div>
 
 
     )
