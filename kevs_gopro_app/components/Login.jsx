@@ -27,7 +27,7 @@ const Login = () => {
         localStorage.setItem('token', dats);
         setToken(dats);
         Router.push('uploadimage.html');
-        console.log(localStorage.getItem('token'))
+        // console.log(localStorage.getItem('token'))
         
       } else {document.getElementById('incorrect').style.display = 'block'}
 

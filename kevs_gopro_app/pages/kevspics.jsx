@@ -1,6 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
-import UserContext from "../components/UserContext";
+// import UserContext from "../components/UserContext";
 import Login from "../components/Login";
 import styles from '../styles/Home.module.css'
 
@@ -10,7 +10,7 @@ const KevsPics = () => {
   const [data, setData] = useState([])
   const [picArr, setPicArr] = useState([])
 
-  const { getToken } = useContext(UserContext)
+  // const { getToken } = useContext(UserContext)
 
 
   // const Redirect = (user) ? redirect('/kevspics') : redirect('/')
