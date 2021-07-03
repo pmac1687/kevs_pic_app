@@ -10,10 +10,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-postcss',
     {
-      resolve: `gatsby-env-variables`,
-
-    },
-    {
       resolve: `gatsby-plugin-s3`,
       options: {
         bucketName: 'kevinspics' ,
