@@ -3,9 +3,6 @@
  *
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
- require("dotenv").config({
-  path: `/env/${process.env.NODE_ENV}.js`,
- })
 
 
 module.exports = {
@@ -14,9 +11,7 @@ module.exports = {
     'gatsby-plugin-postcss',
     {
       resolve: `gatsby-env-variables`,
-      options: {
-        envFolderPath: `env/`
-      }
+
     },
     {
       resolve: `gatsby-plugin-s3`,
