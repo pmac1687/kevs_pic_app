@@ -23,6 +23,10 @@ export default function NavBar() {
         {` `}
         <Link to="/app/profile">Profile</Link>
         {` `}
+        <Link to="/app/kevspics">kevspics</Link>
+        {` `}
+        <Link to="/app/uploadimage">image upload</Link>
+        {` `}
         {isLoggedIn() ? (
           <a
             href="/"

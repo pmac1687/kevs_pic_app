@@ -1,4 +1,4 @@
-import axios from "../../../../kevs_gopro_app/node_modules/axios"
+import axios from "axios"
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -7,8 +7,16 @@ export const getUser = () =>
     ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
     : {}
 
+export const getAPIToken = () =>
+    isBrowser() && window.localStorage.getItem("apiToken")
+      ? JSON.parse(window.localStorage.getItem("apiToken"))
+      : false
+
 const setUser = user =>
-    window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+  window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+    
+const setAPIToken = token =>
+  window.localStorage.setItem("apiToken", JSON.stringify(token))
   
 const verifyUser = (username, password) => {
     console.log(username, password)
@@ -24,22 +32,25 @@ const verifyUser = (username, password) => {
       .then(res => res.data)
         .then(dats => {
           console.log(dats)
-        if (dats) {
-            return dats
+          if (dats) {
+            console.log(4444444,dats)
+            setAPIToken(dats)
           
-        } else return false
+        } 
   
       })
       .catch(() => {  
-        return false
+        // setAPIToken(false)
       });
 }
 
 export const handleLogin = ({ username, password }) => {
     console.log(username, password)
-    const dats = verifyUser(username, password)
-    console.log(dats)
-    if (verifyUser(username, password)) {
+    verifyUser(username, password)
+    console.log(getAPIToken())
+    const token = getAPIToken()
+    console.log(token)
+    if (getAPIToken()) {
       return setUser({
         username: `john`,
         name: `Johnny`,
