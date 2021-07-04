@@ -17,7 +17,6 @@
     "aws-sdk": "^2.939.0",
     "axios": "^0.21.1",
     "gatsby": "^3.8.1",
-    "gatsby-env-variables": "^2.0.0",
     "gatsby-plugin-create-client-paths": "^3.8.0",
     "gatsby-plugin-s3": "^0.3.8",
     "react": "^17.0.1",

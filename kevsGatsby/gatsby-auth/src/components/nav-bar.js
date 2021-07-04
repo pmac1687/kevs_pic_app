@@ -1,10 +1,10 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
-import { getUser, isLoggedIn, logout } from "../services/auth"
+import { getAPIToken, isLoggedIn, logout } from "../services/auth"
 export default function NavBar() {
   let greetingMessage = ""
   if (isLoggedIn()) {
-    greetingMessage = `Hello ${getUser().name}`
+    greetingMessage = `Hello ${getAPIToken()}`
   } else {
     greetingMessage = "You are not logged in"
   }
