@@ -34,13 +34,14 @@ const KevsPics = () => {
   
     useEffect(() => {
       console.log(1)
-    for (let i = 0; i < data.length; i+= 1) {
+      for (let i = 0; i < data.length; i += 1) {
+      console.log(data[i])
       picArr.push(
-        <>
-          <h1>{data[i][1]}</h1>
-          <h1>{data[i][3]}</h1>
-          <img key={i} src={`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][1]}.${data[i][7]}`} alt="Girl in a jacket" width="500" height="600" />
-        </>
+        <React.Fragment key={i}>
+          <h1>{data[i][0]}</h1>
+          <h1>{data[i][2]}</h1>
+          <img key={i} src={`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`} alt="Girl in a jacket" width="500" height="600" />
+        </React.Fragment>
       )
     }
     setPicArr(() => [...picArr]);
