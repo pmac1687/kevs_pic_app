@@ -12,12 +12,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: |
-          pwd
-          cd kevsGatsby/gatsby-auth/
-          ls
-          npm install
-          npm run build
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
