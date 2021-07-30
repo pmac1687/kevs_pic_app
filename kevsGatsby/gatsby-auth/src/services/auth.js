@@ -24,6 +24,8 @@ const setAPIToken = token =>
 const verifyUser = (username, password) => {
   console.log(username, password)
   axios.post(`https://kev.patrickjmcdermott.com/login`, {
+  //axios.post(`http://127.0.0.1:5000/login`, {
+
     headers: {
       "Access-Control-Allow-Origin": "*"
     },
@@ -35,8 +37,7 @@ const verifyUser = (username, password) => {
     .then(res => res.data)
     .then(dats => {
       console.log('impor', dats)
-      if (dats) {
-        console.log(4444444, dats)
+      if (dats !== 'error') {
         setAPIToken(dats)
         return (setUser({
           username: `john`,
@@ -47,7 +48,7 @@ const verifyUser = (username, password) => {
       }
       })
       .catch(() => {  
-        // setAPIToken(false)
+        setAPIToken(false)
       });
 }
 
@@ -65,9 +66,7 @@ export const handleLogin = (username, password) => {
 }
 
 export const isLoggedIn = () => {
-  console.log('islogeedin')
   const user = getUser()
-  console.log('user',user)
   return !!user.username
 }
 

@@ -50,7 +50,7 @@ const KevsPics = () => {
   // const Pic = PicArr && PicArr.map((pic) => (pic))
 
   return (
-      <div className='container'>
+    <div className='container'>
       {picArr.map((pic) => (pic))}
     </div>
 
