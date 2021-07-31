@@ -40,7 +40,7 @@ const Nav = () => {
                                 
                             <a href="#" className={globalHistory.location.pathname === '/app/kevspics' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"}  aria-current="page"><Link to="/app/kevspics">Image Collage</Link></a>
 
-                            <a href="#" className={globalHistory.location.pathname === '/app/uploadimage' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"} ><Link to="/app/uploadimage">Image Upload</Link></a>
+                            <a href="#" className={globalHistory.location.pathname === '/app/uploader' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"} ><Link to="/app/uploader">Image Upload</Link></a>
                             {/*
                             <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
 
