@@ -6,6 +6,7 @@ import AWS from 'aws-sdk';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Resizer from 'react-image-file-resizer';
 
 import { BUCKET_NAME, REGION_NAME, ACCESS_KEY, SECRET_KEY } from "/home/pat/Desktop/kevs_pic_app/kevs_pic_app/kevsGatsby/gatsby-auth/env/development.js"
 
@@ -32,12 +33,27 @@ const Uploader = () => {
 
     const [progress , setProgress] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [resizedFile, setResizedFile] = useState(null)
 
     const col = progress < 100 ? 'red' : 'green';
 
-  const handleFileInput = (e) => {
-    setSelectedFile(e.target.files[0]);
+  const handleFileInput = async (e) => {
+    const img = e.target.files[0]
+    setSelectedFile(img)
+    console.log('before',img)
+    const resized_pic = await resizeFile(img)
+    console.log('resize_img',resized_pic)
+    setResizedFile(resized_pic);
   };
+
+  const resizeFile = (file) => new Promise(resolve => {
+    Resizer.imageFileResizer(file, 300, 300, 'JPEG', 100, 0,
+      uri => {
+        resolve(uri);
+      },
+      'blob'
+      );
+});
 
   const showPics = () => {
     const upload = document.getElementById('upload')
@@ -51,7 +67,7 @@ const Uploader = () => {
         const occasion = document.getElementById('occasion').value ? document.getElementById('occasion').value : '';
         const tags = document.getElementById('tags').value ? document.getElementById('tags').value : '';
         const date = startDate.toISOString().split('T')[0];
-        const fileType = document.getElementById('file-type').value;
+        const fileType = 'JPEG' //document.getElementById('file-type').value;
         const location = document.getElementById('location').value ? document.getElementById('location').value : '';
         const slug = `${name}&${occasion}&${tags}&${date}&${fileType}&${location}&${fType}`
         axios.get(`https://kev.patrickjmcdermott.com/add_row/${slug}`, {
@@ -71,11 +87,11 @@ const Uploader = () => {
 
     const uploadFile = (file) => {
         const name = document.getElementById('grid-first-name').value;
-        const fileType = file.name.split('.')[1]
+        const fileType = 'JPEG'
         console.log(file)
         const params = {
             ACL: 'public-read',
-            Body: file,
+            Body: resizedFile,
             Bucket: S3_BUCKET,
             Key: `${name}.${fileType}`
         };
