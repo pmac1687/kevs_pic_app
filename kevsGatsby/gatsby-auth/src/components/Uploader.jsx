@@ -36,9 +36,9 @@ const Uploader = () => {
       const occasion = document.getElementById('occasion').value ? document.getElementById('occasion').value : '';
       const tags = document.getElementById('tags').value ? document.getElementById('tags').value : '';
       const date = startDate.toISOString().split('T')[0];
-      const fileType = document.getElementById('file-type').value;
+      const Type = document.getElementById('file-type').value;
       const location = document.getElementById('location').value ? document.getElementById('location').value : '';
-      const slug = `${name}&${occasion}&${tags}&${date}&${fileType}&${location}&${fileType}`;
+      const slug = `${name}&${occasion}&${tags}&${date}&${Type}&${location}&${fileType}`;
       sendSlugToDb(slug)
     }
 

@@ -19,7 +19,7 @@ const FormUpload = ({startDate, setStartDate}) => (
 
           <TextInputs
             label={'Occasion'}
-            id={'location'}
+            id={'occasion'}
             p={null}
             placeholder={'Bat Mitzvah'}
             borderColor={'grey'}

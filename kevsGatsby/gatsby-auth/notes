@@ -1,0 +1,56 @@
+Object { … }
+​
+"$response": Object { retryCount: 0, redirectCount: 0, maxRetries: 3, … }
+​​
+cfId: undefined
+​​
+data: null
+​​
+error: SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your key and signing method.
+​​
+extendedRequestId: undefined
+​​
+httpResponse: Object { statusCode: 403, streaming: false, statusMessage: "Forbidden", … }
+​​
+maxRedirects: 10
+​​
+maxRetries: 3
+​​
+redirectCount: 0
+​​
+request: Object { domain: undefined, operation: "deleteObject", _haltHandlersOnError: false, … }
+​​
+retryCount: 0
+​​
+<prototype>: Object { constructor: Response(request), nextPage: nextPage(callback), hasNextPage: hasNextPage(), … }
+​
+<prototype>: Object { … }
+​​
+__defineGetter__: function __defineGetter__()
+​​
+__defineSetter__: function __defineSetter__()
+​​
+__lookupGetter__: function __lookupGetter__()
+​​
+__lookupSetter__: function __lookupSetter__()
+​​
+__proto__: 
+​​
+constructor: function Object()
+​​
+hasOwnProperty: function hasOwnProperty()
+​​
+isPrototypeOf: function isPrototypeOf()
+​​
+propertyIsEnumerable: function propertyIsEnumerable()
+​​
+toLocaleString: function toLocaleString()
+​​
+toString: function toString()
+​​
+valueOf: function valueOf()
+​​
+<get __proto__()>: function __proto__()
+​​
+<set __proto__()>: function __proto__()
+kevspics.js:26

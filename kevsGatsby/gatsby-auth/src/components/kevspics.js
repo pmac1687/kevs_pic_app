@@ -1,48 +1,57 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-// import UserContext from "../components/UserContext";
+import { getPics } from "../utils/postgresAPI";
+import { deleteFromS3 } from "../utils/AWS"
+import { Delete } from "../utils/postgresAPI";
 
 
 const KevsPics = () => {
   const [data, setData] = useState([])
   const [picArr, setPicArr] = useState([])
 
-  // const { getToken } = useContext(UserContext)
-
-
-  // const Redirect = (user) ? redirect('/kevspics') : redirect('/')
-
   useEffect(() => {
-    axios.get(`https://kev.patrickjmcdermott.com/get_rows`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      }
-    })
-      .then(res => res.data)
-      .then(dats => {
-        // eslint-disable-next-line no-console
-        console.log('resdata rows', dats);
-        setData(() => dats);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err)
-      });
+    const getPicData = async () => {
+      const picData = await getPics()
+      setData(() => picData);
+    }
+    getPicData()
   }, []);
+
+  const handleDelete = (e) => {
+    console.log(e.target.id)
+    const picName = e.target.id
+    const filePath = e.target.name
+    Delete(picName, filePath)
+
+
+    //const deletePic = async (picName, filePath) => {
+    //  let successfulDelete = await deleteFromS3(filePath)
+    //    .then(res => {
+    //      console.log(res);
+    //      deleteFromDb(picName);
+    //    })
+    //}
+  //
+//
+    //// if (successfulDelete) {
+    ////   deleteFromDb(picName)
+    //// }
+    //deletePic(picName, filePath)
+  };
   
-  // let Pic
-  
-    useEffect(() => {
-      console.log(1)
-      for (let i = 0; i < data.length; i += 1) {
-      console.log(data[i])
-      picArr.push(
-        <React.Fragment key={i}>
-          <h1>{data[i][0]}</h1>
-          <h1>{data[i][2]}</h1>
-          <img key={i} src={`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`} alt="Girl in a jacket" width="500" height="600" />
-        </React.Fragment>
-      )
+  useEffect(() => {
+    for (let i = 0; i < data.length; i += 1) {
+    console.log(data[i])
+    picArr.push(
+      <React.Fragment key={i}>
+        <h1>{data[i][0]}</h1>
+        <h1>{data[i][2]}</h1>
+        <button onClick={handleDelete} id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+          Delete
+        </button>
+        <img key={i} src={`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`} alt={`${data[i][0]}.${data[i][6]}`} width="500" height="600" />
+      </React.Fragment>
+    )
     }
     setPicArr(() => [...picArr]);
   }, [data])
