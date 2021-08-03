@@ -45,13 +45,13 @@ const Uploader = () => {
   }
 
     return (
-    <div className='container2'>
+    <div className='container2 sm:justify-start md:justify-center'>
         <form className="w-full max-w-lg">
           <FormUpload startDate={startDate} setStartDate={ setStartDate }/>
             <div style={{ marginTop: '2vh'}}>
                 <div style={{ display: 'flex', marginBottom: '1vh'}}>File Upload Progress is: <div style={{ color: col , marginLeft: '.5vw'}}>{progress}%</div></div>
-                <input type="file" onChange={handleFileInput}/>
-                <button  onClick={uploadFile} className="shadow bg-green-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+            <input style={{ marginBottom: '2vh', marginTop: '1vh'}} type="file" onChange={handleFileInput}/>
+                <button style={{ marginTop: '2vh'}}  onClick={uploadFile} className="shadow bg-green-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                     Upload
                 </button>
             </div>

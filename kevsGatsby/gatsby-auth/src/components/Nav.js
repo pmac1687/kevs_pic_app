@@ -34,8 +34,8 @@ const Nav = () => {
                         <img className="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
                         <img className="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
                     </div>
-                    <div style={{ display: `${show}`}} className="hidden sm:block sm:ml-6">
-                            <div className="flex space-x-4">
+                    <div style={{ display: `${show}`}} className="hidden ">
+                            <div className=" hidden md:flex space-x-4">
                             <a href="#" id='projects' className={globalHistory.location.pathname === '/app/profile' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"} ><Link to="/app/profile">Profile</Link></a>
                                 
                             <a href="#" className={globalHistory.location.pathname === '/app/kevspics' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"}  aria-current="page"><Link to="/app/kevspics">Image Collage</Link></a>
@@ -86,15 +86,13 @@ const Nav = () => {
                 </div>
             </div>
         </div>
-        <div className="sm:hidden" id="mobile-menu">
+        <div className="block sm:block md:hidden lg:hidden" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-
-                <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-                <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-                <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                <a href="#" id='projects' className={globalHistory.location.pathname === '/app/profile' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"} ><Link to="/app/profile">Profile</Link></a>
+                                
+                <a href="#" className={globalHistory.location.pathname === '/app/kevspics' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"}  aria-current="page"><Link to="/app/kevspics">Image Collage</Link></a>
+    
+                <a href="#" className={globalHistory.location.pathname === '/app/uploader' ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium links": "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium links"} ><Link to="/app/uploader">Image Upload</Link></a>
             </div>
         </div>
         </nav>
