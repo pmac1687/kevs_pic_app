@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import { getPics } from "../utils/postgresAPI";
-import { deleteFromS3 } from "../utils/AWS"
 import { Delete } from "../utils/postgresAPI";
+import EditInputs from "./elements/EditInputs";
 
 
 const KevsPics = () => {
@@ -18,16 +17,18 @@ const KevsPics = () => {
   }, []);
 
   const handleDelete = (e) => {
+    e.preventDefault()
     console.log(e.target.id)
     const picName = e.target.id
     const filePath = e.target.name
     Delete(picName, filePath);
+    // pause for reload to wait for delete
+    const pause = setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+    return () => clearTimeout(pause);
   };
 
-  const showEditForm = () => {
-    
-  }
-  
   useEffect(() => {
     for (let i = 0; i < data.length; i += 1) {
     console.log(data[i])
@@ -39,56 +40,56 @@ const KevsPics = () => {
         <h1>{data[i][4]}</h1>
         <h1>{data[i][5]}</h1>
         <div>
-        <button onClick={handleDelete} id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+        <button onClick={e => { e.preventDefault(); document.getElementById(`delete${i}`).className = 'flex space-y-8 flex-col w-full h-48 bg-gray-900 place-content-center' }} id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
           Delete
         </button>
-        <button style={{ marginLeft: '.5vw'}} onClick={() =>{document.getElementById(`form${i}`).className = 'block'}} id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+        <button style={{ marginLeft: '.5vw'}} onClick={() =>{document.getElementById(`form${i}`).className = 'block'}} id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
           Edit
         </button>
         </div>
         {/*<img key={i} src={`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`} alt={`${data[i][0]}.${data[i][6]}`} width="500" height="600" />*/}
-          <form style={{ height:'600px', width:'600px', backgroundRepeat: 'no-repeat', backgroundSize:'cover', backgroundImage: `url("${`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`}")` }} class="w-full max-w-sm">
+          <form style={{ height:'600px', width:'600px', backgroundRepeat: 'no-repeat', backgroundSize:'cover', backgroundImage: `url("${`https://kevinspics.s3.ap-southeast-2.amazonaws.com/${data[i][0]}.${data[i][6]}`}")` }} className="w-full max-w-sm">
             <div id={`form${i}`} className="hidden">
-              <div class="flex items-center border-b border-teal-500 py-2">
-                <label className="bg-black text-white" >Title</label>
-                <input className="appearance-none  border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder={data[i][0] ? data[i][0] : 'None'} aria-label="Full name"/>
-              </div>
-              <div class="flex items-center border-b border-teal-500 py-2">
-                <label className="bg-black text-white" >Occasion</label>
-                <input className="appearance-none  border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder={data[i][5] ? data[i][5] : 'None'} aria-label="Full name"/>
-              </div>
-              <div class="flex items-center border-b border-teal-500 py-2">
-                <label className="bg-black text-white" >Tags</label>
-                <input className="appearance-none  border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder={data[i][3] ? data[i][3] : 'None'} aria-label="Full name"/>
-              </div>
-              <div class="flex items-center border-b border-teal-500 py-2">
-                <label className="bg-black text-white" >Date</label>
-                <input className="appearance-none  border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder={data[i][2] ? data[i][2] : 'None'} aria-label="Full name"/>
-              </div>
-              <div class="flex items-center border-b border-teal-500 py-2">
-                <label className="bg-black text-white" >Location</label>
-                <input className="appearance-none  border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder={data[i][4] ? data[i][4] : 'None'} aria-label="Full name"/>
-              </div>
+              <EditInputs id={'Title'} data={data} i={i} num={0}/>
+              <EditInputs id={'Occasion'} data={data} i={i} num={5} />
+              <EditInputs id={'Tags'} data={data} i={i} num={3} />
+              <EditInputs id={'Date'} data={data} i={i} num={2} />
+              <EditInputs id={'Location'} data={data} i={i} num={4} />
               <div style={{ marginTop: '2vh'}} className="flex">
-                <button style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+                <button style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
                   Submit Edit
                 </button>
-                <button onClick={e => {e.preventDefault();document.getElementById(`form${i}`).className = 'hidden'}}  style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                <button onClick={e => {e.preventDefault();document.getElementById(`form${i}`).className = 'hidden'}}  style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                   Close Edit
                 </button>
               </div>
             </div>
+            <div id={`delete${i}`} className='hidden flex space-y-8 flex-col w-full h-48 bg-gray-900 place-content-center'>
+              <div className='justify-self-start text-red-300 text-center'>
+                Are you Sure You Want To Delete Picture?
+              </div>
+              <div  className="flex items-center justify-center">
+                <button onClick={e => handleDelete(e)} style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                  Delete Pic
+                </button>
+                <button onClick={e => {e.preventDefault();document.getElementById(`delete${i}`).className = 'hidden'}}  style={{ marginLeft: '.5vw'}}  id={`${data[i][0]}`} name={`${data[i][0]}.${data[i][6]}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                  Close 
+                </button>
+              </div>
+            </div>
+          
           </form>
       </div>
     )
     }
-    setPicArr(() => [...picArr]);
+    setPicArr((picArr) => [...picArr]);
+    // eslint-disable-next-line
   }, [data])
   
   // const Pic = PicArr && PicArr.map((pic) => (pic))
 
   return (
-    <div className='block md:grid grid-cols-3'>
+    <div className='block md:grid grid-cols-4'>
       {picArr.map((pic) => (pic))}
     </div>
 

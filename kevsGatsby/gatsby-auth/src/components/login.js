@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { navigate } from "gatsby"
-import { handleLogin, isLoggedIn } from "../services/auth"
+import React, { useState } from "react"
+import { handleLogin } from "../services/auth"
 
 const Login = () => {
     const [username, setUsername] = useState('');

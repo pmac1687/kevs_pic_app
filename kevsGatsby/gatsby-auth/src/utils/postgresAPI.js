@@ -34,9 +34,9 @@ export const getPics = async () => {
   return dats
 }
 
-export const Delete = (picName, filePath) => {
+export const Delete = async (picName, filePath) => {
   //axios.get(`http://127.0.0.1:5000/delete_row/${picName}&${filePath}`, {
-  axios.get(`https://kev.patrickjmcdermott.com/delete_row/${picName}&${filePath}`, {
+   axios.get(`https://kev.patrickjmcdermott.com/delete_row/${picName}&${filePath}`, {
       headers: {
         "Access-Control-Allow-Origin": "*",
       }
@@ -47,5 +47,6 @@ export const Delete = (picName, filePath) => {
     })
     .catch(err => { 
       console.log(err)  
-    }); 
+    });
+  
 }

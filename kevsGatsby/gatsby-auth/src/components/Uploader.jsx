@@ -14,7 +14,6 @@ const Uploader = () => {
     const [startDate, setStartDate] = useState(new Date());
 
     const [progress , setProgress] = useState(0);
-    const [selectedFile, setSelectedFile] = useState(null);
     const [resizedFile, setResizedFile] = useState(null)
 
     const col = progress < 100 ? 'red' : 'green';
@@ -22,7 +21,6 @@ const Uploader = () => {
   const handleFileInput = async (e) => {
     const img = e.target.files[0]
     console.log(img, 'e.target')
-    setSelectedFile(img)
     const resized_pic = await resizeFile(img)
     console.log(resized_pic)
     setResizedFile(resized_pic);
