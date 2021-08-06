@@ -14,6 +14,13 @@ const myBucket = new AWS.S3({
     region: REGION,
 })
 
+const takePause = (setProgress) => {
+    const pause = setTimeout(() => {
+        setProgress(0)
+      }, 2000);
+    return () => clearTimeout(pause);
+}
+
 export const sendToS3 = async (name, fileType, resizedFile, setProgress) => {
     const params = {
         ACL: 'public-read',
@@ -23,15 +30,16 @@ export const sendToS3 = async (name, fileType, resizedFile, setProgress) => {
     };
     myBucket.putObject(params)
         .on('httpUploadProgress', (evt) => {
-            setProgress(Math.round((evt.loaded / evt.total) * 100))
+            setProgress(Math.round((evt.loaded / evt.total) * 100));
             if (evt.loaded === evt.total) {
+                takePause(setProgress)
                 return true;
             }
         })
         .send((err) => {
             if (err) {
                 console.log(err);
-                return false
+                return false;
             }
         })
     
